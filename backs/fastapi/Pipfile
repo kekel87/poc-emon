@@ -1,0 +1,46 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "~=0.75"
+fastapi-utils = "~=0.2"
+pydantic = "~=1.9"
+python-dotenv = "~=0.20"
+sqlalchemy = "~=1.4"
+uvicorn = {extras = ["standard"], version = "~=0.17"}
+
+[dev-packages]
+alembic = "~=1.7"
+autoflake  = "~=1.4"
+black = "~=22.3"
+flake8 = "~=4.0"
+invoke = "~=1.7"
+isort = "~=5.10"
+mypy = "~=0.950"
+pytest = "~=7.1"
+pytest-describe = "~=2.0"
+pytest-cov = "~=3.0"
+pytest-mock = "~=3.7"
+requests = "~=2.27"
+sqlalchemy2-stubs = "*"
+types-requests = "*"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+format-black = "black ."
+format-isort = "isort ."
+format-autoflake = "autoflake --in-place --remove-all-unused-imports --recursive ."
+format = "inv --echo format"
+lint-black = "black --check ."
+lint-isort = "isort --check ."
+lint-flake8 = "flake8"
+lint-mypy = "mypy ."
+lint = "inv --echo lint"
+test = "python -m pytest -vv -s"
+start = "uvicorn main:app --port 8080 --reload"
+migrate-db-create = "alembic revision --autogenerate"
+migrate-db-run = "alembic upgrade head"
