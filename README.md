@@ -17,11 +17,11 @@ All fronts must have the same interface and consume the same API (whatever the b
  ┃ ┣ 📂data
  ┃ ┣ 📂style
  ┃ ┗ 📂...
- ┣ 📂front
+ ┣ 📂fronts
  ┃ ┣ 📂angular
  ┃ ┣ 📂vanilla-js
  ┃ ┗ 📂...
- ┣ 📂back
+ ┣ 📂backs
  ┃ ┣ 📂fastapi
  ┃ ┣ 📂plumber
  ┃ ┣ 📂nestjs
