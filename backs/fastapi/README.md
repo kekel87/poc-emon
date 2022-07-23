@@ -34,6 +34,13 @@ See also:
 ```
 pipenv install --dev
 ```
+
+**Init DB**
+
+```
+pipenv run migrate-db-run
+```
+
 **Runnning**
 
 ```bash
