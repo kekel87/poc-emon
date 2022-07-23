@@ -37,7 +37,7 @@ def list(
 )
 def get(
     db: Session = Depends(db_session),
-    id: int = Path(..., description="Pokemon id"),
+    id: int = Path(description="Pokemon id"),
 ) -> model.Pokemon:
     pkm = PokemonService.get(db, id)
 

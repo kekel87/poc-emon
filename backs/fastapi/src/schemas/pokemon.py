@@ -12,8 +12,8 @@ from src.schemas.base import BaseSchema
 # Additional properties stored in DB
 # Additional properties to return via API
 class Pokemon(BaseSchema):
-    id: int = Field(..., description="Pokemon id", example="Bulbasaur")
-    name: str = Field(..., description="Pokemon name", example="Bulbasaur")
+    id: int = Field(description="Pokemon id", example="Bulbasaur")
+    name: str = Field(description="Pokemon name", example="Bulbasaur")
     type_1: Type
     type_2: Optional[Type]
 

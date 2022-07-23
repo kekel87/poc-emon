@@ -43,7 +43,7 @@ def create(
     response_model_exclude_none=True,
 )
 def get(
-    id: int = Path(...),
+    id: int = Path(),
     db: Session = Depends(db_session),
 ) -> model.Team:
     db_team = TeamService.get(db, id)
@@ -62,7 +62,7 @@ def get(
     response_model_exclude_none=True,
 )
 def update(
-    id: int = Path(...),
+    id: int = Path(),
     team: schema.TeamSave = Body(...),
     db: Session = Depends(db_session),
 ) -> model.Team:
@@ -80,7 +80,7 @@ def update(
     description="Detele an existing team.",
 )
 def delete(
-    id: int = Path(...),
+    id: int = Path(),
     db: Session = Depends(db_session),
 ) -> None:
     db_team = TeamService.get(db, id)
