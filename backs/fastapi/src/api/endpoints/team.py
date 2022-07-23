@@ -27,6 +27,7 @@ def list(
     summary="Create a team",
     description="Create a new team, with a maximum of 6 pokemon and un minim of 1.",
     response_model=schema.Team,
+    response_model_exclude_none=True,
 )
 def create(
     team: schema.TeamSave = Body(...),
@@ -35,7 +36,12 @@ def create(
     return TeamService.create(db, team)
 
 
-@router.get("/{id}", summary="Get a team", response_model=schema.Team)
+@router.get(
+    "/{id}",
+    summary="Get a team",
+    response_model=schema.Team,
+    response_model_exclude_none=True,
+)
 def get(
     id: int = Path(...),
     db: Session = Depends(db_session),
@@ -53,6 +59,7 @@ def get(
     summary="Update a team",
     description="Update an existing team.",
     response_model=schema.Team,
+    response_model_exclude_none=True,
 )
 def update(
     id: int = Path(...),

@@ -17,6 +17,7 @@ router = APIRouter()
     response_model=List[schema.Pokemon],
     summary="List pokemons",
     description="List pokemons, with pagination and ordered",
+    response_model_exclude_none=True,
 )
 def list(
     db: Session = Depends(db_session),
@@ -32,6 +33,7 @@ def list(
     responses={404: {}},
     summary="Get one pokemon",
     description="Returns a specific pokemon, with all this information",
+    response_model_exclude_none=True,
 )
 def get(
     db: Session = Depends(db_session),

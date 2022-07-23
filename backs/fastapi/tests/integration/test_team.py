@@ -30,7 +30,10 @@ def describe_create() -> None:
         response = client.post("/teams", json=jsonable_encoder(team.save))
 
         assert response.status_code == status.HTTP_201_CREATED
-        assert response.json() == {"id": 2, **jsonable_encoder(team.save)}
+        assert response.json() == {
+            "id": 2,
+            **jsonable_encoder(team.save, exclude_none=True),
+        }
 
         response = client.get("/teams")
         assert response.status_code == status.HTTP_200_OK
@@ -41,7 +44,7 @@ def describe_get() -> None:
     def it_should_obtain_team(client: TestClient) -> None:
         response = client.get("/teams/1")
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == jsonable_encoder(team.base)
+        assert response.json() == jsonable_encoder(team.base, exclude_none=True)
 
     def it_should_return_not_found(client: TestClient) -> None:
         response = client.get("/teams/99999")
@@ -54,7 +57,10 @@ def describe_update() -> None:
         response = client.put("/teams/1", json=jsonable_encoder(team.save))
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == {"id": 1, **jsonable_encoder(team.save)}
+        assert response.json() == {
+            "id": 1,
+            **jsonable_encoder(team.save, exclude_none=True),
+        }
 
     def it_should_return_not_found(client: TestClient) -> None:
         response = client.put("/teams/99999", json=jsonable_encoder(team.save))
