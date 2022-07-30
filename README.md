@@ -9,6 +9,13 @@ All backs will serve the same API and use the same DB structure.
 
 All fronts must have the same interface and consume the same API (whatever the back).
 
+I will try to provide a `devcontainer.json` for VS code for each POC to avoid rotting PCs with each techno.
+
+## Available POC
+
+- [🐍 FastAPI](backs/fastapi/README.md)
+- [🐘 Symfony](backs/symfony/README.md)
+
 ## Project organization
 
 ```
@@ -20,10 +27,12 @@ All fronts must have the same interface and consume the same API (whatever the b
  ┣ 📂fronts
  ┃ ┣ 📂angular
  ┃ ┣ 📂vanilla-js
+ ┃ ┣ 📂vue
  ┃ ┗ 📂...
  ┣ 📂backs
  ┃ ┣ 📂fastapi
  ┃ ┣ 📂plumber
+ ┃ ┣ 📂symfony
  ┃ ┣ 📂nestjs
  ┃ ┗ 📂...
  ┗ 📂 fullstack
@@ -34,7 +43,7 @@ All fronts must have the same interface and consume the same API (whatever the b
 
 All backs must achieve these objectives:
 - OpenAPI compliante
-- must serve an OpenAPI (swagger-ui)
+- must serve an auto-generated OpenAPI (swagger-ui)
 - SQLite compatible
 - BDD migration tool
 - code linter and formater
@@ -49,7 +58,7 @@ All front must achieve these objectives:
 - consume OpenAPI
 - code linter and formater
 - unit tests
-- integration tests
+- e2e tests
 
 ## FullStack
 

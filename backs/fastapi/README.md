@@ -1,4 +1,4 @@
-# FastAPI
+# 🐍 FastAPI
 
 [FastApi](https://fastapi.tiangolo.com/) provide a fasted way to deliver a higth quality API, with automated OpenAPI documentation 🥰.
 

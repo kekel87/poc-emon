@@ -8,7 +8,7 @@ from src.core.settings import settings
 
 def get_application() -> FastAPI:
     application = FastAPI(
-        title="POCemon API",
+        title="POCemon API (🐍 FastAPI)",
         description="""This API provide list of pokemone and team management""",
         version=__version__,
         openapi_url="/openapi.json",
