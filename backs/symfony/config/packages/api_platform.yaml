@@ -1,0 +1,10 @@
+api_platform:
+    title: 'POCemon API (🐘 Symfony & API Platform)'
+    description: 'This API provide list of pokemone and team management'
+    show_webby: false
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
