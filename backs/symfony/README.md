@@ -34,14 +34,13 @@ composer install
 **Init DB**
 
 ```
-php -dxdebug.mode=off bin/console doctrine:database:create
-php -dxdebug.mode=off bin/console doctrine:migrations:migrate
+php -dxdebug.mode=off bin/console doctrine:migrations:migrate --no-interaction
 ```
 
 **Runnning**
 
 ```bash
-symfony server:start
+symfony server:start --no-tls
 ```
 
 Access to local api <http://localhost:8080/api/>

@@ -1,5 +1,5 @@
 api_platform:
-    title: 'POCemon API (🐘 Symfony & API Platform)'
+    title: 'POCemon API (🐘 Symfony)'
     description: 'This API provide list of pokemone and team management'
     show_webby: false
     mapping:

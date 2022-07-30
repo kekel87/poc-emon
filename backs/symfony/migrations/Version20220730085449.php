@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use App\Entity\Pokemon;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220730085449 extends AbstractMigration
+final class Version20220730085449 extends AbstractMigration implements ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     public function getDescription(): string
     {
         return 'Initial db migration with seed data';
@@ -27,5 +32,57 @@ final class Version20220730085449 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE pokemon');
+    }
+
+    /**
+     * Seed initial data
+     */
+    public function postUp(Schema $schema): void
+    {
+        $url = "https://beta.pokeapi.co/graphql/v1beta";
+        $query = "query {
+        pokemon_v2_pokemon(where: {is_default: {_eq: true}}) {
+            species_id: pokemon_species_id
+            name
+            types: pokemon_v2_pokemontypes {
+            pokemon_v2_type {
+                name
+            }
+            }
+        }
+        }";
+
+        $context  = stream_context_create(array(
+            'http' => array(
+                'method'  => 'POST',
+                'header' => array('Content-Type: application/json'),
+                'content' => json_encode(['query' => $query])
+            )
+        ));
+        $result = file_get_contents($url, false, $context);
+        $pokemons = json_decode($result)->data->pokemon_v2_pokemon;
+
+        // https://stackoverflow.com/a/25960400
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $batchSize = 50;
+
+        for ($i = 0, $c = count($pokemons); $i < $c; ++$i) {
+            $pkm = $pokemons[$i];
+            $types = $pokemons[$i]->types;
+
+            $pkm = new Pokemon;
+            $pkm->id = $pokemons[$i]->species_id;
+            $pkm->name = $pokemons[$i]->name;
+            // $pkm->type1 = $types[0]->pokemon_v2_type->name;
+            // $pkm->type2 = isset($types[1]) ? $types[1]->pokemon_v2_type->name : null;
+            $em->persist($pkm);
+
+            if (($i % $batchSize) === 0) {
+                $em->flush();
+                $em->clear();
+            }
+        }
+        $em->flush();
+        $em->clear();
     }
 }
