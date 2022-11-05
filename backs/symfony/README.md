@@ -34,13 +34,13 @@ composer install
 **Init DB**
 
 ```
-php -dxdebug.mode=off bin/console doctrine:migrations:migrate --no-interaction
+composer migrate-db-run
 ```
 
 **Runnning**
 
 ```bash
-symfony server:start --no-tls
+composer start
 ```
 
 Access to local api <http://localhost:8080/api/>
@@ -50,11 +50,13 @@ Access to local api <http://localhost:8080/api/>
 **Code formating**
 
 ```bash
+composer format
 ```
 
 **Code linting**
 
 ```bash
+composer lint
 ```
 
 **Testing**
@@ -75,7 +77,9 @@ Access to local api <http://localhost:8080/api/>
 - [Building a REST API with Symfony and API platform](https://digitalfortress.tech/tutorial/rest-api-with-symfony-and-api-platform/)
 
 
-## How to update project
+## How to
+
+### Update project
 
 List outdated dependencies
 ```
@@ -85,12 +89,13 @@ composer update "symfony/*" --with-all-dependencies
 ```
 See [API Platform - Upgrade Guide](https://api-platform.com/docs/core/upgrade-guide/)
 
-
-## How to create a DB migration
+## Create a DB migration
 
 ```
-php -dxdebug.mode=off bin/console doctrine:migrations:diff
+composer migrate-db-create
 ```
+
+## Clear cache
 
 ```
 rm -rf var/cache

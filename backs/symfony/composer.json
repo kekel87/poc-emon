@@ -31,6 +31,9 @@
         "symfony/validator": "6.1.*",
         "symfony/yaml": "6.1.*"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.13"
+    },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
@@ -63,6 +66,11 @@
         "symfony/polyfill-php81": "*"
     },
     "scripts": {
+        "start": "symfony server:start --no-tls",
+        "lint": "vendor/bin/php-cs-fixer fix --dry-run",
+        "format": "vendor/bin/php-cs-fixer fix",
+        "migrate-db-create": "php -dxdebug.mode=off bin/console doctrine:migrations:diff",
+        "migrate-db-run": "php -dxdebug.mode=off bin/console doctrine:migrations:migrate --no-interaction",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

@@ -8,11 +8,10 @@ use ApiPlatform\Metadata\GetCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity]
 #[ApiResource(operations: [
     new Get(),
-    new GetCollection()
+    new GetCollection(),
 ])]
 class Pokemon
 {

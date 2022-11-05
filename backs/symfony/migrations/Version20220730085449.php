@@ -43,12 +43,12 @@ final class Version20220730085449 extends AbstractMigration implements Container
     }
 
     /**
-     * Seed initial data
+     * Seed initial data.
      */
     public function postUp(Schema $schema): void
     {
-        $url = "https://beta.pokeapi.co/graphql/v1beta";
-        $query = "query {
+        $url = 'https://beta.pokeapi.co/graphql/v1beta';
+        $query = 'query {
         pokemon_v2_pokemon(where: {is_default: {_eq: true}}) {
             species_id: pokemon_species_id
             name
@@ -58,15 +58,15 @@ final class Version20220730085449 extends AbstractMigration implements Container
             }
             }
         }
-        }";
+        }';
 
-        $context  = stream_context_create(array(
-            'http' => array(
-                'method'  => 'POST',
-                'header' => array('Content-Type: application/json'),
-                'content' => json_encode(['query' => $query])
-            )
-        ));
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => ['Content-Type: application/json'],
+                'content' => json_encode(['query' => $query]),
+            ],
+        ]);
         $result = file_get_contents($url, false, $context);
         $pokemons = json_decode($result)->data->pokemon_v2_pokemon;
 
@@ -78,7 +78,7 @@ final class Version20220730085449 extends AbstractMigration implements Container
             $pkm = $pokemons[$i];
             $types = $pokemons[$i]->types;
 
-            $pkm = new Pokemon;
+            $pkm = new Pokemon();
             $pkm->id = $pokemons[$i]->species_id;
             $pkm->name = $pokemons[$i]->name;
             // $pkm->type1 = $types[0]->pokemon_v2_type->name;
