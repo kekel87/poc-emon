@@ -73,3 +73,27 @@ Access to local api <http://localhost:8080/api/>
 ## Sources
 
 - [Building a REST API with Symfony and API platform](https://digitalfortress.tech/tutorial/rest-api-with-symfony-and-api-platform/)
+
+
+## How to update project
+
+List outdated dependencies
+```
+composer outdated
+composer update
+composer update "symfony/*" --with-all-dependencies
+```
+See [API Platform - Upgrade Guide](https://api-platform.com/docs/core/upgrade-guide/)
+
+
+## How to create a DB migration
+
+```
+php -dxdebug.mode=off bin/console doctrine:migrations:diff
+```
+
+```
+rm -rf var/cache
+php bin/console cache:clear --no-warmup --env=dev
+php bin/console cache:warmup --env=dev
+```
