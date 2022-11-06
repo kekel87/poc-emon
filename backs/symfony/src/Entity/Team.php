@@ -14,31 +14,34 @@ class Team
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     #[Assert\NotBlank]
     public string $name;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     #[Assert\NotBlank]
     public string $owner;
 
     #[ORM\ManyToOne]
     #[Assert\NotBlank]
+    #[Assert\NotNull]
     public Pokemon $pokemon1;
 
     #[ORM\ManyToOne]
-    public Pokemon $pokemon2;
+    public ?Pokemon $pokemon2;
 
     #[ORM\ManyToOne]
-    public Pokemon $pokemon3;
+    public ?Pokemon $pokemon3;
 
     #[ORM\ManyToOne]
-    public Pokemon $pokemon4;
+    public ?Pokemon $pokemon4;
 
     #[ORM\ManyToOne]
-    public Pokemon $pokemon5;
+    public ?Pokemon $pokemon5;
 
     #[ORM\ManyToOne]
-    public Pokemon $pokemon6;
+    public ?Pokemon $pokemon6;
 
     public function getId(): ?int
     {
