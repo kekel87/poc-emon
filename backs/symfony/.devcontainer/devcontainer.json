@@ -35,5 +35,12 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	// https://code.visualstudio.com/remote/advancedcontainers/improve-performance
+	"mounts": [
+    "source=poc-emon-symfony-vendor,target=${containerWorkspaceFolder}/vendor,type=volume",
+    "source=poc-emon-symfony-var,target=${containerWorkspaceFolder}/var,type=volume",
+    "source=poc-emon-symfony-public-bundles,target=${containerWorkspaceFolder}/public/bundles,type=volume"
+	],
+	"postCreateCommand": "sudo chown vscode vendor && sudo chown vscode var && sudo chown vscode public/bundles"
 }

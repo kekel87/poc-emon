@@ -5,27 +5,25 @@
   "build": {
     "dockerfile": "Dockerfile",
     "context": "..",
-    "args": { 
+    "args": {
       // Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
       // Append -bullseye or -buster to pin to an OS version.
       // Use -bullseye variants on local on arm64/Apple Silicon.
-      "VARIANT": "3",
+      "VARIANT": "3.10",
       // Options
       "NODE_VERSION": "none"
     }
   },
-
   "containerEnv": {
     "PIPENV_VENV_IN_PROJECT": "1",
     "PIPENV_DONT_LOAD_ENV": "1"
   },
-
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
       // Set *default* container specific settings.json values on container create.
-      "settings": { 
+      "settings": {
         "python.defaultInterpreterPath": "./.venv/bin/python"
         // "python.linting.enabled": true,
         // "python.linting.pylintEnabled": true,
@@ -46,13 +44,16 @@
       ]
     }
   },
-  
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [8080],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "pipenv install --dev",
-
+  "forwardPorts": [
+    8080
+  ],
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  // https://code.visualstudio.com/remote/advancedcontainers/improve-performance
+  "mounts": [
+    "source=poc-emon-fastapi-.venv,target=${containerWorkspaceFolder}/.venv,type=volume",
+  ],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "sudo chown vscode .venv && pipenv install --dev"
 }
