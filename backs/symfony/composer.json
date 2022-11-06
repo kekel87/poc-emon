@@ -32,7 +32,13 @@
         "symfony/yaml": "6.1.*"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.13"
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "justinrainbow/json-schema": "^5.2",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "6.1.*",
+        "symfony/css-selector": "6.1.*",
+        "symfony/http-client": "6.1.*",
+        "symfony/phpunit-bridge": "^6.1"
     },
     "config": {
         "allow-plugins": {
@@ -69,8 +75,14 @@
         "start": "symfony server:start --no-tls",
         "lint": "vendor/bin/php-cs-fixer fix --dry-run",
         "format": "vendor/bin/php-cs-fixer fix",
+        "test": [
+            "php -dxdebug.mode=off bin/console doctrine:schema:drop --full-database --force --no-interaction --env=test",
+            "php -dxdebug.mode=off bin/console doctrine:migrations:migrate --no-interaction --env=test",
+            "php -dxdebug.mode=coverage bin/phpunit --coverage-text"
+        ],
         "migrate-db-create": "php -dxdebug.mode=off bin/console doctrine:migrations:diff",
         "migrate-db-run": "php -dxdebug.mode=off bin/console doctrine:migrations:migrate --no-interaction",
+        "stop-all": "symfony local:server:stop",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

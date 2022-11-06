@@ -10,10 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
-#[ApiResource(operations: [
-    new Get(),
-    new GetCollection(),
-])]
+#[ApiResource(
+    operations: [
+        new Get(uriTemplate: '/pokemons/{id}'),
+        new GetCollection(uriTemplate: '/pokemons'),
+    ]
+)]
 class Pokemon
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
@@ -30,7 +32,7 @@ class Pokemon
     public Type $type1;
 
     #[ORM\Column(type: 'string', enumType: Type::class, nullable: true)]
-    public ?Type $type2;
+    public ?Type $type2 = null;
 
     public function getId(): ?int
     {
