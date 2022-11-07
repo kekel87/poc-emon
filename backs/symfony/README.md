@@ -62,12 +62,37 @@ composer lint
 **Testing**
 
 ```bash
+composer test
 ```
 
 ## Project structure
 
 ```
+📂symfony
+ ┣ 📂bin
+ ┣ 📂config
+ ┣ 📂migration
+ ┣ 📂public
+ ┣ 📂src
+ ┃ ┣ 📂ApiResource
+ ┃ ┣ 📂Controller
+ ┃ ┣ 📂Entity
+ ┃ ┣ 📂Enum
+ ┃ ┣ 📂Repository
+ ┃ ┗ 📜Kermel.php
+ ┣ 📂templates
+ ┣ 📂tests
+ ┃ ┣ 📂functional
+ ┃ ┗ 📜bootstrap.php
+ ┣ 📜.env
+ ┣ 📜.env.test
+ ┣ 📜.php-cs-fixer.dist.php
+ ┣ 📜composer.json
+ ┣ 📜composer.lock
+ ┣ 📜phpunit.xml.dist
+ ┗ 📜symfony.lock
 ```
+
 
 | Folder/File | Descripton |
 | ----------- | ---------- |
@@ -75,7 +100,8 @@ composer lint
 ## Sources
 
 - [Building a REST API with Symfony and API platform](https://digitalfortress.tech/tutorial/rest-api-with-symfony-and-api-platform/)
-
+- [Youtube API Platform by Grafikart.fr](https://www.youtube.com/playlist?list=PLjwdMgw5TTLU7DcDwEt39EvPBi9EiJnF4)
+- https://github.com/api-platform/core/pull/5120
 
 ## How to
 
@@ -99,6 +125,4 @@ composer migrate-db-create
 
 ```
 rm -rf var/cache
-php bin/console cache:clear --no-warmup --env=dev
-php bin/console cache:warmup --env=dev
 ```
